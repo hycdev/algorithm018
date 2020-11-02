@@ -32,10 +32,14 @@
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        if (root == null) return result;
-        result.addAll(postorderTraversal(root.left));
-        result.addAll(postorderTraversal(root.right));
-        result.add(root.val);
+        postorder(root, result);
         return  result;
+    }
+
+    private void postorder(TreeNode root, List<Integer> result) {
+        if (root == null) return;
+        postorder(root.left, result);
+        postorder(root.right, result);
+        result.add(root.val);
     }
 }
