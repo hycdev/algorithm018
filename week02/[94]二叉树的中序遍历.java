@@ -63,10 +63,14 @@ class Solution {
 class Solution_1 {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        if (root == null) return result;
-        result.addAll(inorderTraversal(root.left));
-        result.add(root.val);
-        result.addAll(inorderTraversal(root.right));
+        inorder(root, result);
         return  result;
+    }
+
+    private void inorder(TreeNode root, List<Integer> result) {
+        if (root == null) return;
+        inorder(root.left, result);
+        result.add(root.val);
+        inorder(root.right, result);
     }
 }

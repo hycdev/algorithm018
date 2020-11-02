@@ -34,13 +34,16 @@
 class Solution {
     public List<Integer> preorder(Node root) {
         List<Integer> result = new ArrayList<>();
-        List<Node> child = root.children;
-        result.add(root.val);
-        if (child != null) {
-            for (Node node : child) {
-                result.addAll(preorder(node));
-            }
-        }
+        doPreorder(root, result);
         return result;
+    }
+
+    private void doPreorder(Node root, List<Integer> result) {
+        if (root == null) return;
+        result.add(root.val);
+        List<Node> child = root.children;
+        if (child == null) return;
+        for (Node node : child)
+            doPreorder(node, result);
     }
 }
