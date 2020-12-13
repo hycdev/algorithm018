@@ -49,3 +49,36 @@
             return list.stream().mapToInt(Integer::intValue).toArray();
         }
     }
+
+     class Solution {
+        public int[] relativeSortArray(int[] arr1, int[] arr2) {
+            // 计数排序
+            /*
+            1. 统计arr1中每个元素出现的次数n，存入数组f
+            2. 遍历arr2 -> x, f(x)个x加入结果集, 将f(x)置0
+            3. 遍历f, 如果f(x) != 0, 则将x加入结果集
+             */
+
+            int max = Arrays.stream(arr1).max().getAsInt();
+            int[] f = new int[max + 1];
+            for (int x : arr1)
+                f[x]++;
+
+            int[] result = new int[arr1.length];
+            int index = 0;
+            for (int x : arr2) {
+                for (int i = 0; i < f[x]; i++) {
+                    result[index++] = x;
+                }
+                f[x] = 0;
+            }
+
+            for (int x = 0; x <= max; x++) {
+                for (int i = 0; i < f[x]; i++) {
+                    result[index++] = x;
+                }
+            }
+
+            return result;
+        }
+    }
